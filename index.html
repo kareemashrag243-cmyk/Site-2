@@ -1,889 +1,100 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Story — Premium Couple</title>
-<meta name="theme-color" content="#210f18">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#210f18;
-  --bg2:#351522;
-  --paper:#fff5f7;
-  --muted:#cdb2ba;
-  --gold:#d89aaa;
-  --gold2:#f6ccd6;
-  --line:rgba(246,204,214,.22);
-  --white:#fff8fa;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--paper);
-  font-family:"DM Sans",sans-serif;
-  font-weight:300;
-  overflow-x:hidden;
-  line-height:1.6;
-}
-body.locked{overflow:hidden}
-a{color:inherit;text-decoration:none}
-button{font:inherit}
-::selection{
-  background:var(--gold);
-  color:#171113;
-}
-/* NOISE */
-.noise{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:50;
-  opacity:.055;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
-}
-/* CURSOR */
-.cursor{
-  position:fixed;
-  width:14px;
-  height:14px;
-  border:1px solid var(--gold2);
-  border-radius:50%;
-  pointer-events:none;
-  z-index:100;
-  transform:translate(-50%,-50%);
-  transition:transform .15s ease,opacity .2s;
-  mix-blend-mode:difference;
-}
-@media(max-width:800px){
-  .cursor{display:none}
-}
-/* MUSIC */
-.music{
-  position:fixed;
-  right:22px;
-  top:22px;
-  z-index:60;
-  width:48px;
-  height:48px;
-  border:1px solid var(--line);
-  border-radius:50%;
-  background:rgba(13,11,12,.65);
-  backdrop-filter:blur(14px);
-  color:var(--gold2);
-  cursor:pointer;
-}
-.music span{
-  display:block;
-  width:15px;
-  height:15px;
-  border:1px solid currentColor;
-  border-radius:50%;
-  margin:auto;
-}
-.music.playing span{
-  animation:spin 2.5s linear infinite;
-}
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-/* INTRO */
-.intro-screen{
-  position:fixed;
-  inset:0;
-  z-index:80;
-  background:#210f18;
-  display:grid;
-  place-items:center;
-  transition:opacity .8s ease,visibility .8s;
-}
-.intro-screen.hide{
-  opacity:0;
-  visibility:hidden;
-}
-.intro-inner{
-  text-align:center;
-  padding:30px;
-}
-.eyebrow{
-  font-size:10px;
-  letter-spacing:5px;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:18px;
-}
-.intro-inner h1{
-  font-family:"Cormorant Garamond",serif;
-  font-size:clamp(60px,12vw,130px);
-  font-weight:400;
-  line-height:.82;
-}
-.intro-inner p{
-  color:var(--muted);
-  margin:25px auto;
-  max-width:420px;
-}
-.enter{
-  border:1px solid var(--gold);
-  background:transparent;
-  color:var(--paper);
-  padding:14px 28px;
-  border-radius:100px;
-  cursor:pointer;
-  letter-spacing:3px;
-  font-size:10px;
-  text-transform:uppercase;
-  transition:.3s;
-}
-.enter:hover{
-  background:var(--gold);
-  color:#151012;
-}
-/* HERO */
-.hero{
-  min-height:100svh;
-  position:relative;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 35%,rgba(199,165,122,.18),transparent 30%),
-    linear-gradient(180deg,#100c0e,#0d0b0c);
-}
-.hero::before,
-.hero::after{
-  content:"";
-  position:absolute;
-  border:1px solid var(--line);
-  border-radius:50%;
-  pointer-events:none;
-}
-.hero::before{
-  width:min(70vw,650px);
-  height:min(70vw,650px);
-  animation:float 8s ease-in-out infinite;
-}
-.hero::after{
-  width:min(90vw,900px);
-  height:min(90vw,900px);
-  opacity:.35;
-}
-@keyframes float{
-  50%{
-    transform:translateY(-12px) scale(1.02);
-  }
-}
-.hero-content{
-  position:relative;
-  z-index:2;
-  padding:30px;
-}
-.hero h1{
-  font-family:"Cormorant Garamond",serif;
-  font-weight:400;
-  font-size:clamp(80px,17vw,190px);
-  line-height:.7;
-  letter-spacing:-5px;
-}
-.hero h1 em{
-  font-size:.42em;
-  color:var(--gold);
-  display:block;
-  letter-spacing:0;
-  font-style:normal;
-  margin:20px 0;
-}
-.hero-date{
-  margin-top:34px;
-  font-size:10px;
-  letter-spacing:5px;
-  color:var(--muted);
-}
-.scroll{
-  margin-top:60px;
-  color:var(--muted);
-  font-size:9px;
-  letter-spacing:4px;
-}
-.scroll i{
-  display:block;
-  width:1px;
-  height:55px;
-  background:linear-gradient(var(--gold),transparent);
-  margin:12px auto;
-}
-/* GENERAL */
-section{
-  position:relative;
-}
-.wrap{
-  max-width:1100px;
-  margin:auto;
-  padding:130px 25px;
-}
-.center{
-  text-align:center;
-}
-.kicker{
-  font-size:10px;
-  letter-spacing:5px;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:18px;
-}
-.title{
-  font-family:"Cormorant Garamond",serif;
-  font-size:clamp(52px,8vw,105px);
-  font-weight:400;
-  line-height:.88;
-}
-.lead{
-  max-width:620px;
-  margin:28px auto 0;
-  color:var(--muted);
-  font-size:14px;
-  line-height:2;
-}
-.reveal{
-  opacity:0;
-  transform:translateY(35px);
-  transition:opacity 1s ease,transform 1s ease;
-}
-.reveal.visible{
-  opacity:1;
-  transform:none;
-}
-/* BEGINNING */
-.beginning{
-  background:var(--bg);
-}
-/* PREMIUM MEMORIES */
-.memories{
-  background:
-    radial-gradient(circle at 20% 20%,rgba(216,154,170,.10),transparent 30%),
-    linear-gradient(135deg,#351522,#210f18);
-  overflow:hidden;
-}
-.memories .wrap{
-  padding-top:120px;
-  padding-bottom:120px;
-}
-.memory-intro{
-  text-align:center;
-  max-width:750px;
-  margin:auto;
-}
-.memory-showcase{
-  margin-top:75px;
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:22px;
-  align-items:center;
-}
-.memory-main{
-  position:relative;
-  overflow:hidden;
-  min-height:600px;
-  background:#160e11;
-  border:1px solid var(--line);
-}
-.memory-main img{
-  width:100%;
-  height:600px;
-  object-fit:cover;
-  display:block;
-  filter:saturate(.85);
-  transition:transform 1s ease,filter 1s ease;
-}
-.memory-main:hover img{
-  transform:scale(1.04);
-  filter:saturate(1);
-}
-.memory-main::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    180deg,
-    transparent 45%,
-    rgba(18,8,12,.85) 100%
-  );
-  pointer-events:none;
-}
-.memory-main-content{
-  position:absolute;
-  bottom:35px;
-  right:35px;
-  left:35px;
-  z-index:2;
-}
-.memory-number{
-  font-size:9px;
-  letter-spacing:4px;
-  color:var(--gold2);
-  margin-bottom:10px;
-}
-.memory-main h3{
-  font-family:"Cormorant Garamond",serif;
-  font-size:52px;
-  font-weight:400;
-  line-height:1;
-}
-.memory-main p{
-  margin-top:10px;
-  max-width:430px;
-  color:#e5cfd5;
-  font-size:12px;
-}
-.memory-side{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-}
-.memory-small{
-  position:relative;
-  overflow:hidden;
-  height:288px;
-  background:#160e11;
-  border:1px solid var(--line);
-}
-.memory-small img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  filter:saturate(.8);
-  transition:transform .8s ease,filter .8s ease;
-}
-.memory-small:hover img{
-  transform:scale(1.06);
-  filter:saturate(1);
-}
-.memory-small::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    180deg,
-    transparent 35%,
-    rgba(18,8,12,.8) 100%
-  );
-}
-.memory-small-content{
-  position:absolute;
-  bottom:22px;
-  right:24px;
-  z-index:2;
-}
-.memory-small-content span{
-  display:block;
-  font-size:8px;
-  letter-spacing:3px;
-  color:var(--gold2);
-  margin-bottom:4px;
-}
-.memory-small-content h4{
-  font-family:"Cormorant Garamond",serif;
-  font-size:30px;
-  font-weight:400;
-}
-.memory-quote{
-  max-width:650px;
-  margin:75px auto 0;
-  padding-top:45px;
-  border-top:1px solid var(--line);
-  text-align:center;
-}
-.memory-quote p{
-  font-family:"Cormorant Garamond",serif;
-  font-size:clamp(30px,5vw,48px);
-  line-height:1.15;
-  color:var(--paper);
-  font-style:italic;
-}
-.memory-quote span{
-  display:block;
-  margin-top:18px;
-  color:var(--muted);
-  font-size:9px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-}
-/* COUNTER */
-.counter{
-  background:linear-gradient(135deg,#351522,#210f18);
-  text-align:center;
-}
-.counter-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  max-width:800px;
-  margin:55px auto 0;
-}
-.time{
-  border:1px solid var(--line);
-  padding:28px 10px;
-  background:rgba(255,255,255,.015);
-}
-.time b{
-  display:block;
-  font-family:"Cormorant Garamond";
-  font-size:58px;
-  font-weight:400;
-  color:var(--gold2);
-  line-height:1;
-}
-.time span{
-  font-size:9px;
-  letter-spacing:3px;
-  color:var(--muted);
-  text-transform:uppercase;
-}
-/* VIDEO */
-.video{
-  background:#f2ebe4;
-  color:#211b19;
-}
-.video .kicker{
-  color:#9d7950;
-}
-.video-box{
-  margin-top:55px;
-  position:relative;
-  overflow:hidden;
-  background:#d7cec4;
-  box-shadow:0 30px 80px rgba(30,20,15,.18);
-}
-.video-box video{
-  width:100%;
-  display:block;
-  max-height:720px;
-  object-fit:cover;
-}
-/* LETTER */
-.letter{
-  background:#e9dfd5;
-  color:#211b19;
-  text-align:center;
-}
-.letter-box{
-  max-width:750px;
-  margin:50px auto 0;
-  padding:60px 45px;
-  border:1px solid rgba(80,60,45,.2);
-  background:rgba(255,255,255,.18);
-}
-.letter-text{
-  font-family:"Cormorant Garamond";
-  font-size:clamp(30px,5vw,52px);
-  line-height:1.15;
-  font-style:italic;
-}
-.signature{
-  margin-top:30px;
-  font-size:10px;
-  letter-spacing:4px;
-  color:#9d7950;
-  text-transform:uppercase;
-}
-/* FINAL */
-.final{
-  min-height:85svh;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  background:#210f18;
-  overflow:hidden;
-}
-.final h2{
-  font-family:"Cormorant Garamond";
-  font-size:clamp(75px,14vw,180px);
-  font-weight:400;
-  line-height:.78;
-}
-.final h2 span{
-  color:var(--gold);
-}
-.final p{
-  margin-top:30px;
-  color:var(--muted);
-  letter-spacing:4px;
-  font-size:9px;
-  text-transform:uppercase;
-}
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:60px 20px;
-  border-top:1px solid var(--line);
-  color:var(--muted);
-  font-size:9px;
-  letter-spacing:3px;
-}
-/* MOBILE */
-@media(max-width:700px){
-  .wrap{
-    padding:95px 20px;
-  }
-  .hero h1{
-    letter-spacing:-2px;
-  }
-  .memory-showcase{
-    grid-template-columns:1fr;
-    gap:15px;
-    margin-top:55px;
-  }
-  .memory-main{
-    min-height:500px;
-  }
-  .memory-main img{
-    height:500px;
-  }
-  .memory-main h3{
-    font-size:43px;
-  }
-  .memory-side{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-  }
-  .memory-small{
-    height:250px;
-  }
-  .memory-small-content{
-    right:16px;
-    bottom:16px;
-  }
-  .memory-small-content h4{
-    font-size:25px;
-  }
-  .memory-quote{
-    margin-top:55px;
-  }
-  .counter-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-  .letter-box{
-    padding:45px 22px;
-  }
-}
-</style>
-</head>
-<body class="locked">
-<div class="noise"></div>
-<div class="cursor" id="cursor"></div>
-<!-- INTRO -->
-<div class="intro-screen" id="intro">
-  <div class="intro-inner">
-    <div class="eyebrow">A little world made for two</div>
-    <h1>
-      Our<br>
-      Story
-    </h1>
-    <p>
-      Some moments deserve more than a photo.
-      They deserve a whole place to live.
-    </p>
-    <button class="enter" id="enter">
-      Enter our story
-    </button>
-  </div>
-</div>
-<!-- MUSIC -->
-<button class="music" id="music" aria-label="تشغيل الموسيقى">
-  <span></span>
-</button>
-<audio id="audio" loop>
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-content reveal">
-    <div class="kicker">
-      A story worth remembering
-    </div>
-    <h1>
-      Omar
-      <em>&</em>
-      Sara
-    </h1>
-    <div class="hero-date">
-      OUR STORY · 2026
-    </div>
-    <div class="scroll">
-      SCROLL TO DISCOVER
-      <i></i>
-    </div>
-  </div>
-</header>
-<!-- BEGINNING -->
-<section class="beginning wrap center reveal">
-  <div class="kicker">
-    The beginning
-  </div>
-  <h2 class="title">
-    Two people.<br>
-    One beautiful story.
-  </h2>
-  <p class="lead">
-    من أول لحظة لحد النهارده، كل تفصيلة صغيرة بقت جزء من حكايتنا.
-    الموقع ده مجرد مكان نحفظ فيه أجمل اللحظات.
-  </p>
-</section>
-<!-- PREMIUM MEMORIES -->
-<section class="memories">
-  <div class="wrap">
-    <div class="memory-intro reveal">
-      <div class="kicker">
-        Moments worth keeping
-      </div>
-      <h2 class="title">
-        The little moments<br>
-        that became everything.
+<!-- PREMIUM SIGNATURE SECTION -->
+<section class="signature-section">
+
+  <div class="signature-wrap">
+
+    <div class="signature-head reveal">
+      <div class="kicker">A collection of us</div>
+
+      <h2>
+        Not every moment<br>
+        was perfect.
       </h2>
-      <p class="lead">
-        مش كل الذكريات محتاجة تاريخ.
-        بعض اللحظات قيمتها في الإحساس اللي بتسيبه جوانا.
-      </p>
-    </div>
-    <div class="memory-showcase">
-      <!-- MAIN MEMORY -->
-      <figure class="memory-main reveal">
-        <img
-          src="photo1.jpg"
-          alt="Our favorite memory"
-        >
-        <div class="memory-main-content">
-          <div class="memory-number">
-            MEMORY · 01
-          </div>
-          <h3>
-            That smile.
-          </h3>
-          <p>
-            صورة واحدة ممكن ترجعلك إحساس يوم كامل.
-          </p>
-        </div>
-      </figure>
-      <!-- SIDE MEMORIES -->
-      <div class="memory-side">
-        <figure class="memory-small reveal">
-          <img
-            src="photo2.jpg"
-            alt="A special memory"
-          >
-          <div class="memory-small-content">
-            <span>
-              MEMORY · 02
-            </span>
-            <h4>
-              Just us.
-            </h4>
-          </div>
-        </figure>
-        <figure class="memory-small reveal">
-          <img
-            src="photo3.jpg"
-            alt="A favorite moment"
-          >
-          <div class="memory-small-content">
-            <span>
-              MEMORY · 03
-            </span>
-            <h4>
-              One of my favorites.
-            </h4>
-          </div>
-        </figure>
-      </div>
-    </div>
-    <div class="memory-quote reveal">
+
       <p>
-        “Some memories don't need words.
-        They just need to be remembered.”
+        But every moment was ours.
       </p>
-      <span>
-        One moment · forever remembered
-      </span>
     </div>
+
+    <div class="memory-wall">
+
+      <!-- MAIN MEMORY -->
+      <div class="memory-piece memory-main reveal">
+
+        <div class="memory-image">
+          <img src="photo1.jpg" alt="Our memory">
+        </div>
+
+        <div class="memory-info">
+          <span>01 / 04</span>
+          <h3>That smile.</h3>
+          <p>A moment worth keeping forever.</p>
+        </div>
+
+      </div>
+
+
+      <!-- SECOND MEMORY -->
+      <div class="memory-piece memory-top reveal">
+
+        <div class="memory-image">
+          <img src="photo2.jpg" alt="Our memory">
+        </div>
+
+        <div class="memory-info">
+          <span>02 / 04</span>
+          <h3>Just us.</h3>
+        </div>
+
+      </div>
+
+
+      <!-- THIRD MEMORY -->
+      <div class="memory-piece memory-bottom reveal">
+
+        <div class="memory-image">
+          <img src="photo3.jpg" alt="Our memory">
+        </div>
+
+        <div class="memory-info">
+          <span>03 / 04</span>
+          <h3>One of my favorites.</h3>
+        </div>
+
+      </div>
+
+
+      <!-- FOURTH MEMORY -->
+      <div class="memory-piece memory-small reveal">
+
+        <div class="memory-image">
+          <img src="photo4.jpg" alt="Our memory">
+        </div>
+
+        <div class="memory-info">
+          <span>04 / 04</span>
+          <h3>Keep this moment.</h3>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="signature-footer reveal">
+
+      <div class="signature-line"></div>
+
+      <div class="signature-center">
+        <span>04 memories</span>
+        <i>·</i>
+        <span>01 story</span>
+      </div>
+
+      <div class="signature-line"></div>
+
+    </div>
+
   </div>
+
 </section>
-<!-- COUNTER -->
-<section class="counter">
-  <div class="wrap center reveal">
-    <div class="kicker">
-      Our time together
-    </div>
-    <h2 class="title">
-      Every second<br>
-      counts.
-    </h2>
-    <div class="counter-grid">
-      <div class="time">
-        <b id="days">00</b>
-        <span>Days</span>
-      </div>
-      <div class="time">
-        <b id="hours">00</b>
-        <span>Hours</span>
-      </div>
-      <div class="time">
-        <b id="minutes">00</b>
-        <span>Minutes</span>
-      </div>
-      <div class="time">
-        <b id="seconds">00</b>
-        <span>Seconds</span>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- VIDEO -->
-<section class="video">
-  <div class="wrap">
-    <div class="center reveal">
-      <div class="kicker">
-        Our film
-      </div>
-      <h2 class="title">
-        Some memories<br>
-        move.
-      </h2>
-    </div>
-    <div class="video-box reveal">
-      <video
-        controls
-        playsinline
-        poster="video-cover.jpg"
-      >
-        <source
-          src="our-video.mp4"
-          type="video/mp4"
-        >
-        Your browser does not support video.
-      </video>
-    </div>
-  </div>
-</section>
-<!-- LETTER -->
-<section class="letter">
-  <div class="wrap reveal">
-    <div class="kicker">
-      A little note
-    </div>
-    <div class="letter-box">
-      <div class="letter-text">
-        “If I could keep one thing from every day,
-        it would be the moments I spent with you.”
-      </div>
-      <div class="signature">
-        With all my heart · Omar
-      </div>
-    </div>
-  </div>
-</section>
-<!-- FINAL -->
-<section class="final">
-  <div class="reveal">
-    <div class="kicker">
-      And now...
-    </div>
-    <h2>
-      Our<br>
-      <span>story.</span>
-    </h2>
-    <p>
-      One journey · countless memories · still us
-    </p>
-  </div>
-</section>
-<!-- FOOTER -->
-<footer>
-  MADE WITH LOVE · OMAR & SARA · 2026
-</footer>
-<script>
-/* INTRO */
-const intro=document.getElementById('intro');
-const enter=document.getElementById('enter');
-const audio=document.getElementById('audio');
-const music=document.getElementById('music');
-enter.addEventListener('click',()=>{
-  intro.classList.add('hide');
-  document.body.classList.remove('locked');
-  audio
-    .play()
-    .then(()=>{
-      music.classList.add('playing');
-    })
-    .catch(()=>{});
-});
-/* MUSIC */
-music.addEventListener('click',()=>{
-  if(audio.paused){
-    audio.play();
-    music.classList.add('playing');
-  }else{
-    audio.pause();
-    music.classList.remove('playing');
-  }
-});
-/* CURSOR */
-const cursor=document.getElementById('cursor');
-window.addEventListener('mousemove',e=>{
-  cursor.style.left=e.clientX+'px';
-  cursor.style.top=e.clientY+'px';
-});
-/* REVEAL */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
-  });
-},{
-  threshold:.12
-});
-document
-  .querySelectorAll('.reveal')
-  .forEach(el=>observer.observe(el));
-/* COUNTER */
-const startDate=new Date("2024-02-14T00:00:00");
-function countUp(){
-  const diff=Math.max(
-    0,
-    new Date()-startDate
-  );
-  const d=Math.floor(
-    diff/86400000
-  );
-  const h=Math.floor(
-    diff/3600000
-  )%24;
-  const m=Math.floor(
-    diff/60000
-  )%60;
-  const s=Math.floor(
-    diff/1000
-  )%60;
-  document.getElementById('days')
-    .textContent=String(d).padStart(2,'0');
-  document.getElementById('hours')
-    .textContent=String(h).padStart(2,'0');
-  document.getElementById('minutes')
-    .textContent=String(m).padStart(2,'0');
-  document.getElementById('seconds')
-    .textContent=String(s).padStart(2,'0');
-}
-countUp();
-setInterval(
-  countUp,
-  1000
-);
-</script>
-</body>
-</html>
