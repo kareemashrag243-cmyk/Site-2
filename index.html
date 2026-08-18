@@ -4,11 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ZEKRA — Our Memories</title>
+<title>ZEKRA — Your Story</title>
 
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap');
 
 *{
     margin:0;
@@ -16,14 +15,24 @@
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+:root{
+    --paper:#eee5d4;
+    --paper2:#e3d6bf;
+    --ink:#302b25;
+    --brown:#766550;
+    --red:#8c5148;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
-    background:#e8dfcf;
-    color:#302c27;
-    overflow-x:hidden;
+    background:#25221e;
+    color:var(--ink);
+    overflow:hidden;
+    font-family:'Playfair Display',serif;
 }
 
 /* =========================
@@ -34,132 +43,213 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
+    z-index:9999;
     pointer-events:none;
-    z-index:999;
-    opacity:.09;
+    opacity:.08;
 
-    background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* =========================
-   HERO
+   BOOK
 ========================= */
 
-.hero{
-    min-height:100vh;
+.book-area{
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    perspective:2200px;
+}
+
+.book{
+    width:min(900px,92vw);
+    height:min(650px,88vh);
+
+    position:relative;
+    transform-style:preserve-3d;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+    position:absolute;
+    inset:0;
+
+    background:var(--paper);
+
+    transform-origin:left center;
+    transform-style:preserve-3d;
+
+    transition:
+        transform 1s cubic-bezier(.65,.05,.25,1),
+        box-shadow 1s;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35);
+
+    overflow:hidden;
+}
+
+/* page order */
+
+.page:nth-child(1){z-index:9;}
+.page:nth-child(2){z-index:8;}
+.page:nth-child(3){z-index:7;}
+.page:nth-child(4){z-index:6;}
+.page:nth-child(5){z-index:5;}
+.page:nth-child(6){z-index:4;}
+.page:nth-child(7){z-index:3;}
+.page:nth-child(8){z-index:2;}
+.page:nth-child(9){z-index:1;}
+
+.page.flipped{
+    transform:rotateY(-180deg);
+    box-shadow:
+        15px 20px 50px rgba(0,0,0,.15);
+}
+
+/* page number */
+
+.page-number{
+    position:absolute;
+    bottom:20px;
+    right:25px;
+
+    font-family:'Space Mono',monospace;
+    font-size:9px;
+    letter-spacing:2px;
+
+    opacity:.45;
+}
+
+/* =========================
+   COVER
+========================= */
+
+.cover{
+    background:
+        linear-gradient(rgba(48,43,37,.05),rgba(48,43,37,.05)),
+        var(--paper2);
+
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:30px 20px;
+}
+
+.cover-inner{
+    width:78%;
+    height:85%;
+
+    border:1px solid rgba(48,43,37,.35);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
     position:relative;
 }
 
-.hero-content{
-    width:100%;
-    max-width:700px;
-}
-
-.logo{
+.cover-small{
     font-family:'Space Mono',monospace;
-    font-weight:700;
-    font-size:14px;
-    letter-spacing:8px;
-    margin-bottom:35px;
-}
-
-.kicker{
-    font-family:'Space Mono',monospace;
-    font-size:10px;
-    letter-spacing:4px;
+    font-size:9px;
+    letter-spacing:5px;
     opacity:.55;
-    margin-bottom:35px;
+    margin-bottom:25px;
 }
 
-.hero h1{
+.cover h1{
     font-family:'DM Serif Display',serif;
-    font-size:clamp(60px,14vw,120px);
-    line-height:.82;
+    font-size:clamp(65px,9vw,105px);
     font-weight:400;
+    line-height:.8;
 }
 
-.hero-text{
-    margin-top:30px;
+.cover h1 span{
+    font-style:italic;
+}
+
+.cover-sub{
+    margin-top:35px;
+
     font-family:'Space Mono',monospace;
-    font-size:12px;
-    line-height:1.8;
+    font-size:9px;
+    letter-spacing:3px;
     opacity:.6;
 }
 
-/* =========================
-   CASSETTE
-========================= */
+.cover-date{
+    position:absolute;
+    bottom:25px;
 
-.cassette-wrap{
-    margin:55px auto 0;
-    width:320px;
-    max-width:90vw;
-    cursor:pointer;
+    font-family:'Space Mono',monospace;
+    font-size:8px;
+    letter-spacing:3px;
+    opacity:.5;
 }
+
+/* cassette */
 
 .cassette{
-    width:100%;
-    aspect-ratio:1.55;
-    background:#b9a78b;
-    border-radius:14px;
-    padding:20px;
-    position:relative;
+    width:230px;
+    height:145px;
+
+    background:#a99a80;
+    border-radius:10px;
+
+    position:absolute;
+    bottom:55px;
+
+    transform:rotate(-4deg);
 
     box-shadow:
-    0 20px 35px rgba(45,35,25,.22),
-    inset 0 1px 0 rgba(255,255,255,.4);
-
-    transform:rotate(-2deg);
-    transition:.4s;
-}
-
-.cassette:hover{
-    transform:rotate(0deg) scale(1.03);
+        0 15px 25px rgba(0,0,0,.2);
 }
 
 .cassette-label{
     position:absolute;
-    top:27px;
-    left:35px;
-    right:35px;
-    height:80px;
+    left:20px;
+    right:20px;
+    top:18px;
+    height:55px;
 
-    background:#e6d5ae;
+    background:#e6d6b5;
 
     display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
-
-    font-family:'Space Mono',monospace;
 }
 
 .cassette-label strong{
-    font-size:25px;
-    letter-spacing:5px;
+    font-family:'Space Mono',monospace;
+    font-size:17px;
+    letter-spacing:4px;
 }
 
-.cassette-label span{
-    font-size:8px;
-    letter-spacing:3px;
-    margin-top:7px;
-    opacity:.6;
+.cassette-label small{
+    font-family:'Space Mono',monospace;
+    font-size:6px;
+    letter-spacing:2px;
+    margin-top:4px;
 }
 
-.tape-window{
+.tape{
     position:absolute;
-    left:42px;
-    right:42px;
-    bottom:25px;
-    height:70px;
+    left:30px;
+    right:30px;
+    bottom:17px;
+    height:43px;
 
-    background:#342e28;
+    background:#302b25;
+
     clip-path:polygon(
         8% 0,
         92% 0,
@@ -170,43 +260,296 @@ body::before{
     display:flex;
     justify-content:space-around;
     align-items:center;
-    padding:0 35px;
 }
 
 .reel{
-    width:48px;
-    height:48px;
+    width:30px;
+    height:30px;
+
     border-radius:50%;
-    background:#c9b99e;
-    border:7px solid #8c7c63;
+    border:6px solid #b8a88e;
+
     position:relative;
 }
 
 .reel::after{
     content:"";
-    width:13px;
-    height:13px;
-    background:#302a25;
+    width:7px;
+    height:7px;
+
+    background:#302b25;
     border-radius:50%;
+
     position:absolute;
-    top:50%;
     left:50%;
+    top:50%;
+
     transform:translate(-50%,-50%);
 }
 
-.reel::before{
-    content:"";
-    position:absolute;
-    width:4px;
-    height:18px;
-    background:#756651;
-    top:8px;
-    left:50%;
-    transform:translateX(-50%);
+/* =========================
+   CONTENT PAGES
+========================= */
+
+.content{
+    height:100%;
+    padding:55px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    position:relative;
 }
 
-.cassette.playing .reel{
-    animation:spin .8s linear infinite;
+.eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:8px;
+    letter-spacing:4px;
+    opacity:.5;
+    margin-bottom:20px;
+}
+
+.content h2{
+    font-family:'DM Serif Display',serif;
+    font-size:clamp(42px,6vw,70px);
+    font-weight:400;
+    line-height:.9;
+}
+
+.content p{
+    max-width:500px;
+    margin-top:25px;
+
+    font-size:15px;
+    line-height:1.9;
+    opacity:.72;
+}
+
+/* =========================
+   BIG PHOTO
+========================= */
+
+.big-photo{
+    padding:35px;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:35px;
+    align-items:center;
+}
+
+.big-photo img{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+
+    filter:
+        sepia(.35)
+        saturate(.65)
+        contrast(.9)
+        brightness(.95);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.18);
+}
+
+.photo-info{
+    padding:20px;
+}
+
+.photo-info h2{
+    font-family:'DM Serif Display',serif;
+    font-size:55px;
+    font-weight:400;
+    line-height:.9;
+}
+
+.photo-info p{
+    margin-top:25px;
+    font-size:14px;
+    line-height:1.8;
+    opacity:.65;
+}
+
+.date{
+    margin-top:25px;
+
+    font-family:'Space Mono',monospace;
+    font-size:9px;
+    letter-spacing:3px;
+    opacity:.5;
+}
+
+/* =========================
+   COLLAGE
+========================= */
+
+.collage{
+    padding:45px;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.collage-title{
+    margin-bottom:25px;
+}
+
+.collage-title h2{
+    font-size:50px;
+}
+
+.photos{
+    flex:1;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+
+    align-items:center;
+}
+
+.mini-photo{
+    background:#f4ecdc;
+    padding:8px 8px 25px;
+
+    box-shadow:0 8px 15px rgba(0,0,0,.15);
+
+    transition:.3s;
+}
+
+.mini-photo:nth-child(1){
+    transform:rotate(-4deg);
+}
+
+.mini-photo:nth-child(2){
+    transform:rotate(3deg);
+}
+
+.mini-photo:nth-child(3){
+    transform:rotate(-2deg);
+}
+
+.mini-photo:hover{
+    transform:rotate(0) scale(1.04);
+}
+
+.mini-photo img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+
+    filter:
+        sepia(.4)
+        saturate(.6)
+        contrast(.9);
+}
+
+/* =========================
+   NOTE
+========================= */
+
+.note{
+    background:#d8c8aa;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.note-paper{
+    width:78%;
+    padding:45px;
+
+    border:1px solid rgba(48,43,37,.25);
+
+    position:relative;
+}
+
+.note-paper::before{
+    content:"";
+
+    position:absolute;
+    inset:12px;
+
+    border:1px solid rgba(48,43,37,.12);
+}
+
+.note-paper h2{
+    font-family:'DM Serif Display',serif;
+    font-size:55px;
+    font-weight:400;
+}
+
+.note-paper p{
+    margin:25px auto 0;
+
+    max-width:500px;
+
+    font-size:16px;
+    line-height:2;
+    font-style:italic;
+
+    opacity:.7;
+}
+
+.signature{
+    margin-top:30px;
+
+    font-family:'Space Mono',monospace;
+    font-size:9px;
+    letter-spacing:3px;
+    opacity:.5;
+}
+
+/* =========================
+   SONG PAGE
+========================= */
+
+.song-page{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.song-inner{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.song-inner h2{
+    font-size:65px;
+}
+
+.song-inner p{
+    margin-top:15px;
+}
+
+.play-btn{
+    margin-top:35px;
+
+    padding:15px 30px;
+
+    border:1px solid var(--ink);
+    background:transparent;
+
+    font-family:'Space Mono',monospace;
+    font-size:9px;
+    letter-spacing:3px;
+
+    cursor:pointer;
+}
+
+.play-btn:hover{
+    background:var(--ink);
+    color:var(--paper);
+}
+
+.playing .reel{
+    animation:spin .7s linear infinite;
 }
 
 @keyframes spin{
@@ -215,729 +558,865 @@ body::before{
     }
 }
 
-.play-text{
-    margin-top:25px;
-    font-family:'Space Mono',monospace;
-    font-size:10px;
-    letter-spacing:3px;
-    opacity:.55;
-}
-
 /* =========================
-   MEMORIES
+   TIMELINE
 ========================= */
 
-.memories{
-    padding:120px 20px;
-    max-width:1100px;
-    margin:auto;
+.timeline{
+    padding:50px;
 }
 
-.heading{
-    text-align:center;
-    margin-bottom:75px;
+.timeline h2{
+    margin-bottom:40px;
 }
 
-.heading small{
-    font-family:'Space Mono',monospace;
-    font-size:9px;
-    letter-spacing:4px;
-    opacity:.55;
-}
-
-.heading h2{
-    font-family:'DM Serif Display',serif;
-    font-size:60px;
-    font-weight:400;
-    margin-top:15px;
-}
-
-/* =========================
-   PHOTO WALL
-========================= */
-
-.photo-wall{
+.timeline-list{
     display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    flex-wrap:wrap;
-    gap:45px 28px;
-}
+    justify-content:space-between;
+    align-items:center;
 
-.photo{
-    width:240px;
-    background:#f5efe2;
-    padding:12px 12px 42px;
-    box-shadow:0 15px 30px rgba(40,30,20,.18);
     position:relative;
-    cursor:pointer;
-    transition:.4s;
 }
 
-.photo:nth-child(1){
-    transform:rotate(-4deg);
-}
-
-.photo:nth-child(2){
-    transform:rotate(3deg);
-}
-
-.photo:nth-child(3){
-    transform:rotate(-2deg);
-}
-
-.photo:nth-child(4){
-    transform:rotate(4deg);
-}
-
-.photo:nth-child(5){
-    transform:rotate(-3deg);
-}
-
-.photo:nth-child(6){
-    transform:rotate(2deg);
-}
-
-.photo:hover{
-    transform:rotate(0) scale(1.06);
-    z-index:5;
-}
-
-.photo img{
-    width:100%;
-    height:255px;
-    object-fit:cover;
-    display:block;
-
-    filter:
-    sepia(.32)
-    saturate(.65)
-    contrast(.9)
-    brightness(.95);
-}
-
-.photo:nth-child(3) img{
-    filter:
-    grayscale(.9)
-    sepia(.18)
-    contrast(.9);
-}
-
-.photo:nth-child(5) img{
-    filter:
-    sepia(.45)
-    saturate(.5)
-    brightness(.9);
-}
-
-.photo::after{
+.timeline-list::before{
     content:"";
+
     position:absolute;
-    top:12px;
-    left:12px;
-    right:12px;
-    bottom:42px;
-
-    pointer-events:none;
-
-    opacity:.18;
-
-    background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-}
-
-.caption{
-    position:absolute;
-    bottom:10px;
     left:0;
     right:0;
+    top:12px;
 
-    text-align:center;
+    height:1px;
 
-    font-family:'Space Mono',monospace;
-    font-size:9px;
-    letter-spacing:1px;
-    opacity:.65;
+    background:rgba(48,43,37,.3);
 }
 
-.date{
-    margin-top:6px;
-    font-size:8px;
-    opacity:.55;
+.time-item{
+    position:relative;
+    width:23%;
 }
 
-/* =========================
-   LETTER
-========================= */
+.dot{
+    width:25px;
+    height:25px;
 
-.letter{
-    max-width:720px;
-    margin:130px auto;
-    padding:75px 40px;
-    text-align:center;
+    border-radius:50%;
 
-    background:#d9c9ad;
+    background:var(--paper);
 
-    box-shadow:0 12px 25px rgba(40,30,20,.1);
+    border:1px solid var(--ink);
 
     position:relative;
+    z-index:2;
 }
 
-.letter::before{
-    content:"";
-    position:absolute;
-    inset:16px;
-    border:1px solid rgba(50,40,30,.25);
+.time-item h3{
+    margin-top:20px;
+
+    font-family:'DM Serif Display',serif;
+    font-size:30px;
+    font-weight:400;
 }
 
-.letter small{
-    font-family:'Space Mono',monospace;
-    font-size:9px;
-    letter-spacing:4px;
+.time-item p{
+    margin-top:8px;
+
+    font-size:11px;
+    line-height:1.6;
     opacity:.6;
 }
 
-.letter h2{
-    font-family:'DM Serif Display',serif;
-    font-size:45px;
-    font-weight:400;
-    margin:20px 0 25px;
-}
-
-.letter p{
-    font-family:'Space Mono',monospace;
-    font-size:11px;
-    line-height:2;
-    opacity:.65;
-}
-
 /* =========================
-   SONG SECTION
+   LAST PAGE
 ========================= */
 
-.song{
-    text-align:center;
-    padding:100px 20px;
-}
-
-.song small{
-    font-family:'Space Mono',monospace;
-    font-size:9px;
-    letter-spacing:4px;
-    opacity:.5;
-}
-
-.song h2{
-    font-family:'DM Serif Display',serif;
-    font-size:50px;
-    font-weight:400;
-    margin:15px 0 30px;
-}
-
-.song button{
-    background:#302c27;
-    color:#eee4d4;
-    border:0;
-    padding:16px 30px;
-    font-family:'Space Mono',monospace;
-    font-size:10px;
-    letter-spacing:2px;
-    cursor:pointer;
-}
-
-/* =========================
-   FINAL
-========================= */
-
-.final{
-    min-height:80vh;
+.last{
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:40px;
 }
 
-.final h2{
+.last h2{
     font-family:'DM Serif Display',serif;
-    font-size:clamp(50px,9vw,95px);
-    line-height:.9;
+    font-size:clamp(55px,8vw,90px);
+    line-height:.85;
     font-weight:400;
 }
 
-.final p{
-    margin-top:30px;
+.last p{
+    margin-top:25px;
+
     font-family:'Space Mono',monospace;
-    font-size:10px;
-    letter-spacing:2px;
+    font-size:9px;
+    letter-spacing:3px;
     opacity:.5;
 }
 
-.replay{
-    margin-top:35px;
-    padding:13px 25px;
-    background:transparent;
-    border:1px solid #40382f;
-    font-family:'Space Mono',monospace;
-    font-size:9px;
-    letter-spacing:2px;
-    cursor:pointer;
-}
-
 /* =========================
-   FOOTER
+   CONTROLS
 ========================= */
 
-footer{
-    padding:45px;
-    text-align:center;
+.controls{
+    position:fixed;
+
+    bottom:22px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:500;
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    background:rgba(30,27,23,.9);
+
+    padding:10px 14px;
+
+    border-radius:30px;
+}
+
+.controls button{
+    width:34px;
+    height:34px;
+
+    border:0;
+    border-radius:50%;
+
+    background:#e7ddca;
+    color:#302b25;
+
+    cursor:pointer;
+
+    font-family:'Space Mono',monospace;
+}
+
+.progress{
+    color:#e7ddca;
 
     font-family:'Space Mono',monospace;
     font-size:8px;
-    letter-spacing:3px;
-    opacity:.4;
-}
+    letter-spacing:2px;
 
-/* =========================
-   IMAGE POPUP
-========================= */
-
-.overlay{
-    position:fixed;
-    inset:0;
-
-    background:rgba(28,24,20,.92);
-
-    display:none;
-    justify-content:center;
-    align-items:center;
-
-    z-index:1000;
-    padding:20px;
-}
-
-.overlay.active{
-    display:flex;
-}
-
-.overlay img{
-    max-width:90%;
-    max-height:85vh;
-
-    box-shadow:0 20px 60px rgba(0,0,0,.5);
-
-    filter:
-    sepia(.25)
-    saturate(.7)
-    contrast(.9);
-}
-
-.close{
-    position:absolute;
-    top:20px;
-    right:25px;
-
-    color:white;
-    font-size:35px;
-    cursor:pointer;
+    min-width:65px;
+    text-align:center;
 }
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:600px){
+@media(max-width:700px){
 
-    .cassette-wrap{
-        width:285px;
+    body{
+        background:#ddd2bd;
+        overflow:hidden;
     }
 
-    .hero h1{
-        font-size:65px;
+    .book{
+        width:94vw;
+        height:78vh;
     }
 
-    .heading h2{
-        font-size:45px;
+    .content{
+        padding:30px;
     }
 
-    .photo{
-        width:215px;
+    .cover-inner{
+        width:85%;
     }
 
-    .photo img{
-        height:225px;
+    .cassette{
+        width:190px;
+        height:120px;
+        bottom:40px;
     }
 
-    .letter{
-        margin:100px 20px;
+    .cassette-label{
+        left:15px;
+        right:15px;
+        top:14px;
+        height:45px;
+    }
+
+    .cassette-label strong{
+        font-size:14px;
+    }
+
+    .tape{
+        left:20px;
+        right:20px;
+        bottom:12px;
+        height:35px;
+    }
+
+    .reel{
+        width:25px;
+        height:25px;
+    }
+
+    .big-photo{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        gap:20px;
+        padding:25px;
+    }
+
+    .big-photo img{
+        height:290px;
+    }
+
+    .photo-info{
+        padding:0;
+    }
+
+    .photo-info h2{
+        font-size:42px;
+    }
+
+    .photo-info p{
+        font-size:12px;
+        margin-top:12px;
+    }
+
+    .photos{
+        gap:8px;
+    }
+
+    .mini-photo{
+        padding:5px 5px 15px;
+    }
+
+    .mini-photo img{
+        height:150px;
+    }
+
+    .note-paper{
+        width:88%;
+        padding:35px 20px;
+    }
+
+    .note-paper h2{
+        font-size:42px;
+    }
+
+    .note-paper p{
+        font-size:13px;
+    }
+
+    .timeline{
+        padding:30px;
+    }
+
+    .timeline-list{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:25px;
+    }
+
+    .timeline-list::before{
+        left:12px;
+        top:0;
+        bottom:0;
+        width:1px;
+        height:auto;
+    }
+
+    .time-item{
+        width:100%;
+        display:grid;
+        grid-template-columns:25px 1fr;
+        column-gap:18px;
+    }
+
+    .time-item h3{
+        margin:0;
+        font-size:25px;
+    }
+
+    .time-item p{
+        grid-column:2;
     }
 
 }
-
 </style>
 </head>
 
 <body>
 
+<div class="book-area">
 
-<!-- =========================
-     HERO
-========================= -->
+<div class="book" id="book">
 
-<section class="hero">
+<!-- ================= COVER ================= -->
 
-<div class="hero-content">
+<section class="page cover">
 
-    <div class="logo">
-        ZEKRA
-    </div>
+    <div class="cover-inner">
 
-    <div class="kicker">
-        YOUR MEMORIES, ONE TAP AWAY
-    </div>
+        <div class="cover-small">
+            ZEKRA PRESENTS
+        </div>
 
-    <h1>
-        Our<br>
-        Memories
-    </h1>
+        <h1>
+            Our<br>
+            <span>Story</span>
+        </h1>
 
-    <p class="hero-text">
-        A little collection of moments<br>
-        that we never want to forget.
-    </p>
+        <div class="cover-sub">
+            YOUR MEMORIES, ONE TAP AWAY
+        </div>
 
-
-    <!-- CASSETTE -->
-
-    <div class="cassette-wrap" onclick="toggleMusic()">
-
-        <div class="cassette" id="cassette">
+        <div class="cassette">
 
             <div class="cassette-label">
-
                 <strong>ZEKRA</strong>
-
-                <span>
-                    MEMORY TAPE • 01
-                </span>
-
+                <small>MEMORY TAPE • 01</small>
             </div>
 
-            <div class="tape-window">
-
+            <div class="tape">
                 <div class="reel"></div>
-
                 <div class="reel"></div>
-
             </div>
 
         </div>
 
-        <div class="play-text" id="playText">
-            PRESS PLAY
+        <div class="cover-date">
+            EST. 2026
         </div>
 
     </div>
 
-</div>
+    <div class="page-number">
+        COVER
+    </div>
 
 </section>
 
 
-<!-- =========================
-     MEMORIES
-========================= -->
+<!-- ================= PAGE 1 ================= -->
 
-<section class="memories" id="memories">
+<section class="page">
 
-    <div class="heading">
+    <div class="content">
 
-        <small>
-            PHOTOGRAPHS • MOMENTS • US
-        </small>
+        <div class="eyebrow">
+            CHAPTER 01 • THE BEGINNING
+        </div>
 
         <h2>
-            The old days
+            It all<br>
+            started here.
+        </h2>
+
+        <p>
+            Every story has a beginning.
+            Ours started with little moments
+            that slowly became something
+            worth remembering.
+        </p>
+
+        <div class="date">
+            12 • 06 • 2021
+        </div>
+
+    </div>
+
+    <div class="page-number">
+        01
+    </div>
+
+</section>
+
+
+<!-- ================= PAGE 2 ================= -->
+
+<section class="page big-photo">
+
+    <img src="photo1.jpg">
+
+    <div class="photo-info">
+
+        <div class="eyebrow">
+            MEMORY No. 01
+        </div>
+
+        <h2>
+            The first one.
+        </h2>
+
+        <p>
+            One picture.
+            One moment.
+            A memory that somehow
+            stayed with us.
+        </p>
+
+        <div class="date">
+            12 • 06 • 2021
+        </div>
+
+    </div>
+
+    <div class="page-number">
+        02
+    </div>
+
+</section>
+
+
+<!-- ================= PAGE 3 ================= -->
+
+<section class="page collage">
+
+    <div class="collage-title">
+
+        <div class="eyebrow">
+            CHAPTER 02 • LITTLE MOMENTS
+        </div>
+
+        <h2>
+            The days between.
         </h2>
 
     </div>
 
+    <div class="photos">
 
-    <div class="photo-wall">
-
-
-        <div class="photo" onclick="openImage(this)">
-
-            <img src="photo.jpg1">
-
-            <div class="caption">
-
-                our first memory
-
-                <div class="date">
-                    12 • 06 • 2021
-                </div>
-
-            </div>
-
+        <div class="mini-photo">
+            <img src="photo2.jpg">
         </div>
 
-
-        <div class="photo" onclick="openImage(this)">
-
-            <img src="photo.jpg2">
-
-            <div class="caption">
-
-                that summer
-
-                <div class="date">
-                    28 • 07 • 2021
-                </div>
-
-            </div>
-
+        <div class="mini-photo">
+            <img src="photo3.jpg">
         </div>
 
-
-        <div class="photo" onclick="openImage(this)">
-
-            <img src="photo.jpg4">
-
-            <div class="caption">
-
-                just us
-
-                <div class="date">
-                    04 • 09 • 2021
-                </div>
-
-            </div>
-
+        <div class="mini-photo">
+            <img src="photo4.jpg">
         </div>
 
+    </div>
 
-        <div class="photo" onclick="openImage(this)">
-
-            <img src="photo.jpg4">
-
-            <div class="caption">
-
-                one of my favorites
-
-                <div class="date">
-                    16 • 01 • 2022
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="photo" onclick="openImage(this)">
-
-            <img src="photo5.jpg">
-
-            <div class="caption">
-
-                good old days
-
-                <div class="date">
-                    22 • 05 • 2022
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="photo" onclick="openImage(this)">
-
-            <img src="photo6.jpg">
-
-            <div class="caption">
-
-                still remember
-
-                <div class="date">
-                    08 • 08 • 2022
-                </div>
-
-            </div>
-
-        </div>
-
-
+    <div class="page-number">
+        03
     </div>
 
 </section>
 
 
-<!-- =========================
-     LETTER
-========================= -->
+<!-- ================= PAGE 4 ================= -->
 
-<section class="letter">
+<section class="page big-photo">
 
-    <small>
-        A NOTE FOR YOU
-    </small>
+    <div class="photo-info">
 
-    <h2>
-        Maybe someday these pictures will be old, but I hope the love in them never is.” 📼❤️
-    </h2>
+        <div class="eyebrow">
+            MEMORY No. 04
+        </div>
 
-    <p>
+        <h2>
+            Good old days.
+        </h2>
 
-     .<br>
-        .<br>
-        .<br>
-        .
+        <p>
+            The kind of days you don't
+            realize are special until
+            they become memories.
+        </p>
 
-        <br><br>
+        <div class="date">
+            16 • 01 • 2022
+        </div>
 
-        
-        <br>
-        
-
-    </p>
-
-</section>
-
-
-<!-- =========================
-     SONG
-========================= -->
-
-<section class="song">
-
-    <small>
-        MEMORY TAPE
-    </small>
-
-    <h2>
-        Our Song
-    </h2>
-
-    <button onclick="toggleMusic()">
-        PLAY / PAUSE
-    </button>
-
-</section>
-
-
-<!-- =========================
-     FINAL
-========================= -->
-
-<section class="final">
-
-<div>
-
-    <h2>
-        Some memories<br>
-        never get old.
-    </h2>
-
-    <p>
-        AND THIS IS OURS.
-    </p>
-
-    <button class="replay" onclick="location.reload()">
-        REWIND ↶
-    </button>
-
-</div>
-
-</section>
-
-
-<footer>
-
-    ZEKRA © 2026<br><br>
-    YOUR MEMORIES, ONE TAP AWAY ♡
-
-</footer>
-
-
-<!-- =========================
-     IMAGE POPUP
-========================= -->
-
-<div class="overlay" id="overlay" onclick="closeImage()">
-
-    <div class="close">
-        ×
     </div>
 
-    <img id="popupImage">
+    <img src="photo5.jpg">
 
+    <div class="page-number">
+        04
+    </div>
+
+</section>
+
+
+<!-- ================= PAGE 5 ================= -->
+
+<section class="page note">
+
+    <div class="note-paper">
+
+        <div class="eyebrow">
+            A NOTE FOR YOU
+        </div>
+
+        <h2>
+            Maybe someday...
+        </h2>
+
+        <p>
+            “Maybe one day these pictures
+            will look old, but I hope the love
+            behind them never is.”
+        </p>
+
+        <div class="signature">
+            — WITH LOVE ♡
+        </div>
+
+    </div>
+
+    <div class="page-number">
+        05
+    </div>
+
+</section>
+
+
+<!-- ================= PAGE 6 ================= -->
+
+<section class="page song-page">
+
+    <div class="song-inner">
+
+        <div class="eyebrow">
+            MEMORY TAPE • SIDE A
+        </div>
+
+        <h2>
+            Our Song
+        </h2>
+
+        <p>
+            Press play and let the memories roll.
+        </p>
+
+        <button class="play-btn" onclick="toggleMusic(event)">
+            ▶ PLAY OUR SONG
+        </button>
+
+    </div>
+
+    <div class="page-number">
+        06
+    </div>
+
+</section>
+
+
+<!-- ================= PAGE 7 ================= -->
+
+<section class="page timeline">
+
+    <div class="eyebrow">
+        CHAPTER 03 • THROUGH THE YEARS
+    </div>
+
+    <h2>
+        A little timeline.
+    </h2>
+
+    <div class="timeline-list">
+
+        <div class="time-item">
+
+            <div class="dot"></div>
+
+            <div>
+                <h3>2021</h3>
+                <p>
+                    Where everything began.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="time-item">
+
+            <div class="dot"></div>
+
+            <div>
+                <h3>2022</h3>
+                <p>
+                    More memories.
+                    More reasons to smile.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="time-item">
+
+            <div class="dot"></div>
+
+            <div>
+                <h3>2023</h3>
+                <p>
+                    Another chapter
+                    worth keeping.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="time-item">
+
+            <div class="dot"></div>
+
+            <div>
+                <h3>∞</h3>
+                <p>
+                    Still writing
+                    the story.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="page-number">
+        07
+    </div>
+
+</section>
+
+
+<!-- ================= PAGE 8 ================= -->
+
+<section class="page last">
+
+    <div>
+
+        <div class="eyebrow">
+            THE LAST PAGE
+        </div>
+
+        <h2>
+            Some stories<br>
+            deserve to be<br>
+            read again.
+        </h2>
+
+        <p>
+            THIS IS OURS.
+        </p>
+
+    </div>
+
+    <div class="page-number">
+        08
+    </div>
+
+</section>
+
+
+</div>
 </div>
 
 
-<!-- =========================
-     AUDIO
-========================= -->
+<!-- ================= CONTROLS ================= -->
+
+<div class="controls">
+
+    <button onclick="previousPage()">
+        ‹
+    </button>
+
+    <div class="progress" id="progress">
+        COVER
+    </div>
+
+    <button onclick="nextPage()">
+        ›
+    </button>
+
+</div>
+
 
 <audio id="music" loop>
-
-    <source src="Albumaty.Com_twwlyt_wla_aash_wla_kan (1).mp3" type="audio/mpeg">
-
+    <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 
 <script>
 
+const pages = document.querySelectorAll(".page");
+const progress = document.getElementById("progress");
 const music = document.getElementById("music");
-const cassette = document.getElementById("cassette");
-const playText = document.getElementById("playText");
+
+let currentPage = 0;
 
 
-function toggleMusic(){
+/* =========================
+   PAGE FLIP
+========================= */
 
-    if(music.paused){
+function nextPage(){
 
-        music.play();
+    if(currentPage < pages.length - 1){
 
-        cassette.classList.add("playing");
+        pages[currentPage].classList.add("flipped");
 
-        playText.innerText = "NOW PLAYING";
+        currentPage++;
 
-    }else{
-
-        music.pause();
-
-        cassette.classList.remove("playing");
-
-        playText.innerText = "PRESS PLAY";
+        updateProgress();
 
     }
 
 }
 
 
-/* IMAGE POPUP */
+function previousPage(){
 
-function openImage(element){
+    if(currentPage > 0){
 
-    const image = element.querySelector("img");
+        currentPage--;
 
-    document.getElementById("popupImage").src = image.src;
+        pages[currentPage].classList.remove("flipped");
 
-    document
-    .getElementById("overlay")
-    .classList.add("active");
+        updateProgress();
+
+    }
+
+}
+
+
+function updateProgress(){
+
+    if(currentPage === 0){
+
+        progress.innerText = "COVER";
+
+    }else{
+
+        progress.innerText =
+            String(currentPage).padStart(2,"0")
+            + " / "
+            + String(pages.length - 1).padStart(2,"0");
+
+    }
 
 }
 
 
-function closeImage(){
+/* =========================
+   MUSIC
+========================= */
 
-    document
-    .getElementById("overlay")
-    .classList.remove("active");
+function toggleMusic(event){
+
+    if(event){
+        event.stopPropagation();
+    }
+
+    const reels = document.querySelectorAll(".reel");
+
+    if(music.paused){
+
+        music.play();
+
+        reels.forEach(reel=>{
+            reel.parentElement.classList.add("playing");
+        });
+
+        document.querySelector(".play-btn").innerText =
+            "Ⅱ PAUSE SONG";
+
+    }else{
+
+        music.pause();
+
+        reels.forEach(reel=>{
+            reel.parentElement.classList.remove("playing");
+        });
+
+        document.querySelector(".play-btn").innerText =
+            "▶ PLAY OUR SONG";
+
+    }
 
 }
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key === "ArrowRight"){
+        nextPage();
+    }
+
+    if(e.key === "ArrowLeft"){
+        previousPage();
+    }
+
+});
+
+
+/* =========================
+   CLICK PAGE
+========================= */
+
+pages.forEach((page,index)=>{
+
+    page.addEventListener("click",(e)=>{
+
+        if(
+            e.target.closest("button") ||
+            e.target.closest(".play-btn")
+        ){
+            return;
+        }
+
+        if(index === currentPage){
+
+            nextPage();
+
+        }else if(index === currentPage - 1){
+
+            previousPage();
+
+        }
+
+    });
+
+});
+
+
+/* =========================
+   SWIPE
+========================= */
+
+let startX = 0;
+
+document.addEventListener("touchstart",(e)=>{
+
+    startX = e.touches[0].clientX;
+
+});
+
+document.addEventListener("touchend",(e)=>{
+
+    const endX = e.changedTouches[0].clientX;
+
+    const difference = endX - startX;
+
+    if(Math.abs(difference) < 50){
+        return;
+    }
+
+    if(difference < 0){
+        nextPage();
+    }else{
+        previousPage();
+    }
+
+});
 
 </script>
 
