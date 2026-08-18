@@ -29,16 +29,17 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
-    z-index:999;
+    z-index:9999;
     pointer-events:none;
-    opacity:.08;
+    opacity:.07;
 
-    background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 
-/* BOOK AREA */
+/* =========================
+   BOOK
+========================= */
 
 .book-area{
     width:100vw;
@@ -51,9 +52,6 @@ body::before{
     perspective:2200px;
 }
 
-
-/* BOOK */
-
 .book{
     width:min(900px,92vw);
     height:min(650px,88vh);
@@ -64,7 +62,9 @@ body::before{
 }
 
 
-/* PAGES */
+/* =========================
+   PAGES
+========================= */
 
 .page{
     position:absolute;
@@ -75,11 +75,9 @@ body::before{
     transform-origin:left center;
     transform-style:preserve-3d;
 
-    transition:
-        transform 1s cubic-bezier(.65,.05,.25,1);
+    transition:transform 1s cubic-bezier(.65,.05,.25,1);
 
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.4);
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
 
     overflow:hidden;
 
@@ -100,11 +98,8 @@ body::before{
 }
 
 
-/* PAGE NUMBER */
-
 .page-number{
     position:absolute;
-
     bottom:22px;
     right:25px;
 
@@ -112,7 +107,6 @@ body::before{
     font-size:8px;
 
     letter-spacing:2px;
-
     opacity:.4;
 }
 
@@ -148,32 +142,40 @@ body::before{
     align-items:center;
 }
 
-
 .logo{
     font-family:'Space Mono',monospace;
 
     font-weight:700;
-
     font-size:13px;
 
     letter-spacing:7px;
 
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
-
 
 .cover-title{
     font-family:'DM Serif Display',serif;
 
-    font-size:55px;
+    font-size:50px;
 
     font-weight:400;
 
     line-height:.9;
 
-    margin-bottom:20px;
+    margin-bottom:10px;
 }
 
+.names{
+    font-family:'Playfair Display',serif;
+
+    font-size:18px;
+
+    font-style:italic;
+
+    opacity:.75;
+
+    margin-bottom:10px;
+}
 
 .cover-sub{
     font-family:'Space Mono',monospace;
@@ -182,25 +184,22 @@ body::before{
 
     letter-spacing:3px;
 
-    opacity:.55;
+    opacity:.5;
 
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
-
-
-/* COVER PHOTO */
 
 .cover-photo{
     width:100%;
     max-width:470px;
 
-    height:330px;
+    height:315px;
 
     object-fit:cover;
 
     filter:
-        sepia(.35)
-        saturate(.65)
+        sepia(.38)
+        saturate(.62)
         contrast(.9)
         brightness(.95);
 
@@ -208,9 +207,8 @@ body::before{
         0 12px 30px rgba(0,0,0,.2);
 }
 
-
 .cover-bottom{
-    margin-top:18px;
+    margin-top:15px;
 
     font-family:'Space Mono',monospace;
 
@@ -218,7 +216,7 @@ body::before{
 
     letter-spacing:3px;
 
-    opacity:.55;
+    opacity:.5;
 }
 
 
@@ -232,12 +230,9 @@ body::before{
     padding:60px;
 
     display:flex;
-
     flex-direction:column;
-
     justify-content:center;
 }
-
 
 .eyebrow{
     font-family:'Space Mono',monospace;
@@ -251,7 +246,6 @@ body::before{
     margin-bottom:20px;
 }
 
-
 .content h2{
     font-family:'DM Serif Display',serif;
 
@@ -261,7 +255,6 @@ body::before{
 
     line-height:.9;
 }
-
 
 .content p{
     max-width:520px;
@@ -274,7 +267,6 @@ body::before{
 
     opacity:.68;
 }
-
 
 .date{
     margin-top:25px;
@@ -305,7 +297,6 @@ body::before{
     align-items:center;
 }
 
-
 .photo-page img{
     width:100%;
 
@@ -322,11 +313,9 @@ body::before{
         0 15px 30px rgba(0,0,0,.2);
 }
 
-
 .photo-text{
     padding:15px;
 }
-
 
 .photo-text h2{
     font-family:'DM Serif Display',serif;
@@ -337,7 +326,6 @@ body::before{
 
     line-height:.9;
 }
-
 
 .photo-text p{
     margin-top:25px;
@@ -362,7 +350,6 @@ body::before{
     flex-direction:column;
 }
 
-
 .collage h2{
     font-family:'DM Serif Display',serif;
 
@@ -370,7 +357,6 @@ body::before{
 
     font-weight:400;
 }
-
 
 .collage-grid{
     flex:1;
@@ -386,16 +372,13 @@ body::before{
     margin-top:25px;
 }
 
-
 .polaroid{
     background:#f5eee0;
 
     padding:8px 8px 25px;
 
-    box-shadow:
-        0 10px 20px rgba(0,0,0,.15);
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
 }
-
 
 .polaroid:nth-child(1){
     transform:rotate(-4deg);
@@ -408,7 +391,6 @@ body::before{
 .polaroid:nth-child(3){
     transform:rotate(-2deg);
 }
-
 
 .polaroid img{
     width:100%;
@@ -440,7 +422,6 @@ body::before{
     text-align:center;
 }
 
-
 .note-box{
     width:78%;
 
@@ -450,7 +431,6 @@ body::before{
 
     position:relative;
 }
-
 
 .note-box::before{
     content:"";
@@ -462,7 +442,6 @@ body::before{
     border:1px solid rgba(48,43,37,.12);
 }
 
-
 .note-box h2{
     font-family:'DM Serif Display',serif;
 
@@ -470,7 +449,6 @@ body::before{
 
     font-weight:400;
 }
-
 
 .note-box p{
     max-width:520px;
@@ -486,7 +464,6 @@ body::before{
     opacity:.7;
 }
 
-
 .signature{
     margin-top:30px;
 
@@ -501,92 +478,327 @@ body::before{
 
 
 /* =========================
-   SONG
+   SONG PAGE
 ========================= */
 
 .song{
     display:flex;
 
     justify-content:center;
-
     align-items:center;
 
     text-align:center;
+
+    position:relative;
+
+    background:#e5dac6;
 }
 
+.music-notes{
+    position:absolute;
 
-.song-inner h2{
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    transition:opacity .8s;
+}
+
+.song.active .music-notes{
+    opacity:1;
+}
+
+.note-symbol{
+    position:absolute;
+
+    top:-60px;
+
     font-family:'DM Serif Display',serif;
 
-    font-size:70px;
+    font-size:25px;
 
-    font-weight:400;
+    color:#766550;
+
+    opacity:.32;
+
+    animation:fall linear infinite;
+}
+
+.note-symbol:nth-child(1){
+    left:8%;
+    animation-duration:7s;
+}
+
+.note-symbol:nth-child(2){
+    left:20%;
+    animation-duration:9s;
+    animation-delay:1s;
+}
+
+.note-symbol:nth-child(3){
+    left:34%;
+    animation-duration:8s;
+    animation-delay:3s;
+}
+
+.note-symbol:nth-child(4){
+    left:49%;
+    animation-duration:10s;
+    animation-delay:1.5s;
+}
+
+.note-symbol:nth-child(5){
+    left:63%;
+    animation-duration:7.5s;
+    animation-delay:4s;
+}
+
+.note-symbol:nth-child(6){
+    left:76%;
+    animation-duration:9s;
+    animation-delay:2s;
+}
+
+.note-symbol:nth-child(7){
+    left:89%;
+    animation-duration:8.5s;
+    animation-delay:3.5s;
+}
+
+@keyframes fall{
+
+    0%{
+        transform:translateY(-80px) rotate(-15deg);
+    }
+
+    50%{
+        transform:translateY(350px) translateX(20px) rotate(15deg);
+    }
+
+    100%{
+        transform:translateY(750px) translateX(-15px) rotate(-20deg);
+    }
 }
 
 
-.song-inner p{
-    margin-top:15px;
+/* CASSETTE */
 
-    font-size:14px;
+.song-inner{
+    position:relative;
 
-    opacity:.6;
+    z-index:5;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
 }
 
+.cassette{
+    width:270px;
+    height:165px;
 
-.play{
-    margin-top:30px;
+    background:#a99a80;
 
-    padding:14px 28px;
+    border-radius:10px;
 
-    background:transparent;
+    position:relative;
 
-    border:1px solid #302b25;
+    margin-bottom:35px;
 
-    font-family:'Space Mono',monospace;
+    transform:rotate(-3deg);
 
-    font-size:8px;
-
-    letter-spacing:3px;
-
-    cursor:pointer;
+    box-shadow:0 18px 30px rgba(0,0,0,.2);
 }
 
+.cassette-label{
+    position:absolute;
 
-.play:hover{
-    background:#302b25;
+    left:20px;
+    right:20px;
 
-    color:#eee5d4;
-}
+    top:20px;
 
+    height:65px;
 
-/* =========================
-   FINAL
-========================= */
+    background:#e7d8b9;
 
-.final{
     display:flex;
 
     justify-content:center;
 
     align-items:center;
 
-    text-align:center;
+    flex-direction:column;
 }
 
+.cassette-label strong{
+    font-family:'Space Mono',monospace;
 
-.final h2{
+    font-size:18px;
+
+    letter-spacing:4px;
+}
+
+.cassette-label small{
+    font-family:'Space Mono',monospace;
+
+    font-size:6px;
+
+    letter-spacing:2px;
+
+    margin-top:5px;
+}
+
+.tape{
+    position:absolute;
+
+    left:30px;
+    right:30px;
+
+    bottom:18px;
+
+    height:45px;
+
+    background:#302b25;
+
+    clip-path:polygon(
+        8% 0,
+        92% 0,
+        100% 100%,
+        0 100%
+    );
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+}
+
+.reel{
+    width:32px;
+    height:32px;
+
+    border-radius:50%;
+
+    border:6px solid #b8a88e;
+
+    position:relative;
+}
+
+.reel::after{
+    content:"";
+
+    width:7px;
+    height:7px;
+
+    background:#302b25;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+}
+
+.song.playing .reel{
+    animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.song-inner h2{
     font-family:'DM Serif Display',serif;
 
-    font-size:clamp(55px,8vw,90px);
-
-    line-height:.85;
+    font-size:65px;
 
     font-weight:400;
 }
 
+.song-inner p{
+    margin-top:12px;
 
-.final p{
+    font-size:13px;
+
+    opacity:.6;
+}
+
+
+/* =========================
+   FINAL PAGE
+========================= */
+
+.final{
+    padding:40px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:35px;
+
+    align-items:center;
+}
+
+.final img{
+    width:100%;
+
+    height:470px;
+
+    object-fit:cover;
+
+    filter:
+        sepia(.4)
+        saturate(.6)
+        contrast(.9);
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.2);
+}
+
+.final-text{
+    text-align:center;
+}
+
+.final-text h2{
+    font-family:'DM Serif Display',serif;
+
+    font-size:clamp(45px,6vw,70px);
+
+    line-height:.9;
+
+    font-weight:400;
+}
+
+.final-text p{
     margin-top:25px;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    font-style:italic;
+
+    opacity:.65;
+}
+
+.final-text small{
+    display:block;
+
+    margin-top:30px;
 
     font-family:'Space Mono',monospace;
 
@@ -617,8 +829,16 @@ body::before{
         padding:15px;
     }
 
+    .logo{
+        font-size:11px;
+    }
+
     .cover-title{
-        font-size:42px;
+        font-size:40px;
+    }
+
+    .names{
+        font-size:15px;
     }
 
     .cover-photo{
@@ -689,10 +909,61 @@ body::before{
         font-size:13px;
     }
 
+    .cassette{
+        width:220px;
+        height:135px;
+    }
+
+    .song-inner h2{
+        font-size:50px;
+    }
+
+    .final{
+        display:flex;
+
+        flex-direction:column;
+
+        justify-content:center;
+
+        padding:25px;
+
+        gap:20px;
+    }
+
+    .final img{
+        height:290px;
+    }
+
+    .final-text h2{
+        font-size:42px;
+    }
+
+    .final-text p{
+        font-size:12px;
+
+        margin-top:12px;
+    }
+
+}
+
+
+/* REDUCE MOTION */
+
+@media(prefers-reduced-motion:reduce){
+
+    .page{
+        transition:none;
+    }
+
+    .note-symbol{
+        animation:none;
+    }
+
 }
 
 </style>
 </head>
+
 
 <body>
 
@@ -718,11 +989,17 @@ body::before{
             Our Story
         </div>
 
+        <!-- غير الأسماء هنا -->
+
+        <div class="names">
+            Your Name & Their Name
+        </div>
+
         <div class="cover-sub">
             A COLLECTION OF MEMORIES
         </div>
 
-        <!-- حط صورة الشخصين هنا -->
+        <!-- صورة الشخصين -->
 
         <img
             class="cover-photo"
@@ -730,8 +1007,10 @@ body::before{
             alt="Our Story"
         >
 
+        <!-- غير التاريخ هنا -->
+
         <div class="cover-bottom">
-            2021 — ∞
+            SINCE 14.08.2023
         </div>
 
     </div>
@@ -768,7 +1047,7 @@ body::before{
         </p>
 
         <div class="date">
-            12 • 06 • 2021
+            14 • 08 • 2023
         </div>
 
     </div>
@@ -806,7 +1085,7 @@ body::before{
         </p>
 
         <div class="date">
-            28 • 07 • 2021
+            28 • 08 • 2023
         </div>
 
     </div>
@@ -891,34 +1170,63 @@ body::before{
 
 
 <!-- =========================
-     PAGE 5
+     PAGE 5 — SONG
 ========================= -->
 
-<section class="page song">
+<section class="page song" id="songPage">
+
+    <div class="music-notes">
+
+        <span class="note-symbol">♪</span>
+        <span class="note-symbol">♫</span>
+        <span class="note-symbol">♩</span>
+        <span class="note-symbol">♪</span>
+        <span class="note-symbol">♫</span>
+        <span class="note-symbol">♬</span>
+        <span class="note-symbol">♪</span>
+
+    </div>
+
 
     <div class="song-inner">
 
+        <div class="cassette">
+
+            <div class="cassette-label">
+
+                <strong>ZEKRA</strong>
+
+                <small>
+                    MEMORY TAPE • SIDE A
+                </small>
+
+            </div>
+
+            <div class="tape">
+
+                <div class="reel"></div>
+
+                <div class="reel"></div>
+
+            </div>
+
+        </div>
+
+
         <div class="eyebrow">
-            MEMORY TAPE • SIDE A
+            OUR SONG
         </div>
 
         <h2>
-            Our Song
+            This one is ours.
         </h2>
 
         <p>
-            A song that belongs to us.
+            Some songs become memories.
         </p>
 
-        <button
-            class="play"
-            onclick="toggleMusic(event)"
-            id="musicButton"
-        >
-            ▶ PLAY
-        </button>
-
     </div>
+
 
     <div class="page-number">
         05
@@ -950,7 +1258,7 @@ body::before{
         </p>
 
         <div class="date">
-            16 • 01 • 2022
+            16 • 01 • 2024
         </div>
 
     </div>
@@ -970,7 +1278,14 @@ body::before{
 
 <section class="page final">
 
-    <div>
+    <!-- الصورة الأخيرة -->
+
+    <img
+        src="photo7.jpg"
+        alt="Last Memory"
+    >
+
+    <div class="final-text">
 
         <div class="eyebrow">
             THE LAST PAGE
@@ -983,8 +1298,14 @@ body::before{
         </h2>
 
         <p>
-            THIS IS OURS.
+            “And I'd choose you,
+            in every version
+            of our story.”
         </p>
+
+        <small>
+            THIS IS OURS ♡
+        </small>
 
     </div>
 
@@ -996,45 +1317,125 @@ body::before{
 
 
 </div>
+
 </div>
 
 
+<!-- =========================
+     MUSIC
+========================= -->
+
 <audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
+
+    <source
+        src="music.mp3"
+        type="audio/mpeg"
+    >
+
 </audio>
 
 
 <script>
 
-const pages = document.querySelectorAll(".page");
+const pages =
+document.querySelectorAll(".page");
+
+const music =
+document.getElementById("music");
+
+const songPage =
+document.getElementById("songPage");
 
 let currentPage = 0;
 
+let musicStarted = false;
+
 
 /* =========================
-   MANUAL PAGE TURN
+   NEXT PAGE
 ========================= */
 
 function nextPage(){
 
-    if(currentPage < pages.length - 1){
+    if(currentPage >= pages.length - 1){
+        return;
+    }
 
-        pages[currentPage].classList.add("flipped");
 
-        currentPage++;
+    /*
+       أول تقليبة من الغلاف
+       تشغل الأغنية
+    */
+
+    if(currentPage === 0 && !musicStarted){
+
+        musicStarted = true;
+
+        music.play().catch(()=>{});
 
     }
+
+
+    pages[currentPage]
+        .classList
+        .add("flipped");
+
+
+    currentPage++;
+
+
+    updateSongAnimation();
 
 }
 
 
+/* =========================
+   PREVIOUS PAGE
+========================= */
+
 function previousPage(){
 
-    if(currentPage > 0){
+    if(currentPage <= 0){
+        return;
+    }
 
-        currentPage--;
 
-        pages[currentPage].classList.remove("flipped");
+    currentPage--;
+
+
+    pages[currentPage]
+        .classList
+        .remove("flipped");
+
+
+    updateSongAnimation();
+
+}
+
+
+/* =========================
+   SONG ANIMATION
+========================= */
+
+function updateSongAnimation(){
+
+    /*
+       صفحة الكاسيت رقم 5
+    */
+
+    if(currentPage === 5){
+
+        songPage.classList.add("active");
+
+        songPage.classList.add("playing");
+
+    }
+
+    else{
+
+        songPage.classList.remove("active");
+
+        songPage.classList.remove("playing");
 
     }
 
@@ -1048,10 +1449,6 @@ function previousPage(){
 pages.forEach((page,index)=>{
 
     page.addEventListener("click",(event)=>{
-
-        if(event.target.closest("button")){
-            return;
-        }
 
         if(index === currentPage){
 
@@ -1071,39 +1468,52 @@ pages.forEach((page,index)=>{
 
 
 /* =========================
-   SWIPE
+   TOUCH
 ========================= */
 
 let startX = 0;
 
-document.addEventListener("touchstart",(event)=>{
+document.addEventListener(
+    "touchstart",
+    (event)=>{
 
-    startX = event.touches[0].clientX;
-
-});
-
-
-document.addEventListener("touchend",(event)=>{
-
-    const endX = event.changedTouches[0].clientX;
-
-    const distance = endX - startX;
-
-    if(Math.abs(distance) < 60){
-        return;
-    }
-
-    if(distance < 0){
-
-        nextPage();
-
-    }else{
-
-        previousPage();
+        startX =
+            event.touches[0].clientX;
 
     }
+);
 
-});
+
+document.addEventListener(
+    "touchend",
+    (event)=>{
+
+        const endX =
+            event.changedTouches[0].clientX;
+
+        const distance =
+            endX - startX;
+
+
+        if(Math.abs(distance) < 60){
+            return;
+        }
+
+
+        if(distance < 0){
+
+            nextPage();
+
+        }
+
+        else{
+
+            previousPage();
+
+        }
+
+    }
+);
 
 
 /* =========================
@@ -1111,72 +1521,58 @@ document.addEventListener("touchend",(event)=>{
 ========================= */
 
 let mouseStart = 0;
+
 let mouseDown = false;
 
 
-document.addEventListener("mousedown",(event)=>{
+document.addEventListener(
+    "mousedown",
+    (event)=>{
 
-    mouseStart = event.clientX;
+        mouseStart =
+            event.clientX;
 
-    mouseDown = true;
-
-});
-
-
-document.addEventListener("mouseup",(event)=>{
-
-    if(!mouseDown){
-        return;
-    }
-
-    const distance = event.clientX - mouseStart;
-
-    mouseDown = false;
-
-    if(Math.abs(distance) < 60){
-        return;
-    }
-
-    if(distance < 0){
-
-        nextPage();
-
-    }else{
-
-        previousPage();
+        mouseDown = true;
 
     }
-
-});
-
-
-/* =========================
-   MUSIC
-========================= */
-
-const music = document.getElementById("music");
-const musicButton = document.getElementById("musicButton");
+);
 
 
-function toggleMusic(event){
+document.addEventListener(
+    "mouseup",
+    (event)=>{
 
-    event.stopPropagation();
+        if(!mouseDown){
+            return;
+        }
 
-    if(music.paused){
 
-        music.play();
+        const distance =
+            event.clientX - mouseStart;
 
-        musicButton.innerText = "Ⅱ PAUSE";
 
-    }else{
+        mouseDown = false;
 
-        music.pause();
 
-        musicButton.innerText = "▶ PLAY";
+        if(Math.abs(distance) < 60){
+            return;
+        }
+
+
+        if(distance < 0){
+
+            nextPage();
+
+        }
+
+        else{
+
+            previousPage();
+
+        }
 
     }
-
-}
+);
 
 </script>
 
